@@ -1,6 +1,8 @@
 # vgmpicoTurbo
 [Raspberry PICO](https://www.switch-science.com/catalog/6900/)向けの[VGMファイル](https://www.jpedia.wiki/blog/en/VGM_(file_format))簡易プレイヤーTurboです。<br>
 MicroPython版の[vgmpico](https://github.com/Layer812/vgmpico/)に比べて遅延を低減しています。(効果には個人差...)<br>
+FM音源対応予定でしたが、次の３連休に期待。<br>
+## vgmpicoとの差分
 他に以下を改善、及び改善予定です。<br>
  - 仕様書に沿ったSample Wait/処理高速化     (できました)
  - 最大VGMサイズの撤廃(FM/PCM音源に向けて)　(よくできました)
@@ -8,7 +10,7 @@ MicroPython版の[vgmpico](https://github.com/Layer812/vgmpico/)に比べて遅�
  - VGMコマンド全対応                        (がんばりましょう)
  - GD3表示対応(戻す器まではできた)　　　　　(もうすこしです)
 
-##使い方
+## 使い方
 ### 使う物
  - Raspbery pico(以降Pico) 1個
  - ブレッドボード
