@@ -39,13 +39,13 @@ Gd3buff = bytearray(256)
 MvGd3buff = memoryview(Gd3buff)
 Gd3buff[0] = LOOP_NUM
 
+#ファイル入れ替えなどで止めたい人用
 time.sleep(1)
 
 #初期化
 for i, chip in enumerate(Chips):
     if chip == CHIP_TYPE_PWMPSG:
         rc = vgmpicoTurbo.modinit(i, chip, ",".join(map(str, PWM_PIN)))
-        print("rc", rc)
     elif chip == CHIP_TYPE_SSC:
         vgmpicoTurbo.modinit(i, chip, ",".join(map(str, SSC_PIN)))
     else:
