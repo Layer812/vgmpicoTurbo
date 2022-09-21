@@ -6,17 +6,13 @@ import os,time
 
 #VGMファイルを一度に読む量
 BUFFER_SIZE=2048
-#ループ数、0にすると無限ループ
+#ループ数、0にすると無限ループ(曲によってループしない指定のファイルもあります)
 LOOP_NUM=1
 
-#チップタイプの定数
+#音源チップ毎の定数
 CHIP_TYPE_NONE = 0
 CHIP_TYPE_PWMPSG = 1  #SUPPORTED (PwmでPSGを鳴らすやつ)
-PWM_PIN=[27, 26]
-
 CHIP_TYPE_SSC    = 2  #TO BE SUPPORTED
-#           SCL SDA  SCL SDA
-SSC_PIN = [[0,  0], [0,  0]]
 CHIP_TYPE_YM2203 = 3  #TO BE SUPPORTED
 CHIP_TYPE_YM3824 = 4  #TO BE SUPPORTED
 CHIP_TYPE_YM2151 = 5  #TO BE SUPPORTED
@@ -27,17 +23,19 @@ CHIP_TYPE_YM2149 = 9  #TO BE SUPPORTED
 CHIP_TYPE_YM2210 = 10 #TO BE SUPPORTED
 CHIP_TYPE_APU    = 11 #TO BE SUPPORTED
 CHIP_TYPE_YM3812 = 12 #TO BE SUPPORTED
-CHIP_TYPE_YM2413 = 13 #TO BE SUPPORTED
+CHIP_TYPE_YM2413 = 13 #SUPPORTED
 CHIP_TYPE_SPU    = 14 #TO BE SUPPORTED
 CHIP_TYPE_NSX1   = 15 #TO BE SUPPORTED
 
-#            ENABLE, D0,D1,D2,D3,D4,D5,D6,D7,A0,A1,WR,IC,CS,CLOCK
-CHIP_PINS =[[ 0,     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
-            [ 0,     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]]
+#音源チップ向け初期化定数(GPIOピン指定、PWMはPWMPSG用、SDA/SCLはSSC用、D0以降は生チップ用です。)
+#            CHIPTYPE,          PWM, SDA, SCL, D0,D1,D2,D3,D4,D5,D6,D7,A0,A1,WR,IC,CS,CLOCK
+#Chips =    [[ CHIP_TYPE_YM2413,  -1,  -1,  -1, 28,29, 0, 1, 2, 3, 4, 5, 0, 0, 0, 0, 0, 6],
+#            [ CHIP_TYPE_PWMPSG,  27,  -1,  -1, -1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1]]
+Chips =    [[ CHIP_TYPE_PWMPSG,  26,  -1,  -1, -1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1],
+            [ CHIP_TYPE_PWMPSG,  27,  -1,  -1, -1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1],
+            [ CHIP_TYPE_NONE,    -1,  -1,  -1, -1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1]]  #番兵君
 
-#チップ初期化(チップが刺さっている種類と順番)
-Chips = [CHIP_TYPE_PWMPSG, CHIP_TYPE_NONE]
-
+#GD3表示文戻し用領域
 Gd3buff = bytearray(256)
 MvGd3buff = memoryview(Gd3buff)
 Gd3buff[0] = LOOP_NUM
@@ -47,13 +45,8 @@ time.sleep(1)
 
 #初期化
 for i, chip in enumerate(Chips):
-    if chip == CHIP_TYPE_PWMPSG:
-        rc = vgmpicoTurbo.modinit(i, chip, ",".join(map(str, PWM_PIN)))
-    elif chip == CHIP_TYPE_SSC:
-        vgmpicoTurbo.modinit(i, chip, ",".join(map(str, SSC_PIN)))
-    else:
-        vgmpicoTurbo.modinit(i, chip, ",".join(map(str, CHIP_PINS)))
-
+    rc = vgmpicoTurbo.modinit(i, chip[0], ",".join(map(str, chip)))
+    print(rc)
 #main.pyと同じディレクトリにあるvgmファイルを全部再生
 for file in os.listdir('/'):
     if ".vgm" not in file:
@@ -61,10 +54,9 @@ for file in os.listdir('/'):
     with open(file, 'rb') as fr:
         vgm_data = fr.read(BUFFER_SIZE)
         rc = vgmpicoTurbo.vgminit(vgm_data, BUFFER_SIZE, MvGd3buff)
-        while True:
+        while rc > 0:
             fr.seek(rc, 0)
             vgm_data = fr.read(BUFFER_SIZE)
             rc = vgmpicoTurbo.play(vgm_data, BUFFER_SIZE)
             if rc <= 0:
                 break
-
