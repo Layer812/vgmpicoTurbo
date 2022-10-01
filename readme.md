@@ -37,10 +37,10 @@ MicroPython版の[vgmpico](https://github.com/Layer812/vgmpico/)に比べて遅�
 1.firmware.uf2をPicoにアップロードします<br>
 2.[Thonny](https://thonny.org/)を使い、main.pyをアップロードします。<br>
 3.接続するFM音源チップ、ピンアサインに応じてmain.pyを変更します。<br>
-　変更箇所は30行目～40行目までの、PythonのList形式で表現されるChips定義です。
-　#[CHIPTYPE,          PWM, SDA, SCL, D0,D1,D2,D3,D4,D5,D6,D7,A0,A1,IC,WR,CS,CLOCK],
+　変更箇所は30行目～40行目までの、PythonのList形式で表現されるChips定義です。<br>
+　#[CHIPTYPE,          PWM, SDA, SCL, D0,D1,D2,D3,D4,D5,D6,D7,A0,A1,IC,WR,CS,CLOCK],<br>
 　- CHIPTYPEは接続する物理FM音源チップ(12行目～28行目までに定義)の定数を入れます、同じ種類のチップの定義は２行まで有効です。
-  - PWMは現在使用していないので -1のままとしてください。
+  - PWMは使用しないので -1とします。
   - SDAとSCLはSCC([SoundCortexLPC](https://github.com/toyoshim/SoundCortexLPC)向けの定義です。I2C通信に使用するGPIOを指定します。
   - D0～CSまでは、物理チップのピンに接続するGPIOを指定します。定義不要なピンは-1とします。
   - CLOCKにはクロックを出力するGPIOを指定します。物理チップ毎に決められた周波数のクロックを出力します。
@@ -50,6 +50,7 @@ MicroPython版の[vgmpico](https://github.com/Layer812/vgmpico/)に比べて遅�
 1.YM2413 + SCCの接続例
 ![接続図](https://user-images.githubusercontent.com/111331376/193421841-b2023a7a-d450-4506-9125-61ee690a7262.png)
 ``` Chips定義
+#[CHIPTYPE,          PWM, SDA, SCL, D0,D1,D2,D3,D4,D5,D6,D7,A0,A1,IC,WR,CS,CLOCK],
 Chips =     [[ CHIP_TYPE_YM2413,  -1,  -1,  -1, 28,29, 0, 1, 2, 3, 4, 5, 8,-1,15,14,-1, 6],
             [ CHIP_TYPE_SSC,   -1,  12,  13, -1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1],
             [ CHIP_TYPE_NONE,  -1,  -1,  -1, -1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1]] #番兵君
@@ -58,6 +59,7 @@ Chips =     [[ CHIP_TYPE_YM2413,  -1,  -1,  -1, 28,29, 0, 1, 2, 3, 4, 5, 8,-1,15
 2.YM3438(YM2612)の接続例
 ![接続図](https://user-images.githubusercontent.com/111331376/193421951-c0c07c5c-f851-422f-a71b-bd2a036278a2.png)
 ``` Chips定義
+　#[CHIPTYPE,          PWM, SDA, SCL, D0,D1,D2,D3,D4,D5,D6,D7,A0,A1,IC,WR,CS,CLOCK],
 Chips =    [[ CHIP_TYPE_YM3438,  -1,  -1,  -1,  0, 1, 2, 3, 4, 5, 6, 7,27,28,14,29,-1, 26],
             [ CHIP_TYPE_NONE,  -1,  -1,  -1, -1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1]] #番兵君
 ```
@@ -68,12 +70,11 @@ Chips =    [[ CHIP_TYPE_YM3438,  -1,  -1,  -1,  0, 1, 2, 3, 4, 5, 6, 7,27,28,14,
  - Thonnyの実行を押すか、再起動するとmain.pyと同じディレクトリのvgmファイルが読み込まれ、再生が始まります
 
 ### 止め方(ファイルの入れ替え方)
- - Raspberry Picoのリセットボタンを押します。
- - 1秒以内にThronyの停止ボタンを押すと、止まります（*´∀｀*）
- - VGMファイルはThonnyでアップロードしてください。
+ - Raspberry Picoのリセット後、1秒以内にThonnyの停止ボタンを押すとThonnyによるファイル入れ替えが可能です。
+ - VGMファイルはmain.pyと同じディレクトリにThonnyでアップロードしてください。
 
 ## TODO
- - 対応音源の増加(対応予定はmain.pyに記載)
+ - 対応音源の増加
  - VGMコマンド全対応
  - GD3表示対応
  - DAC(YM3012/YM3014)をState Machineで実装
