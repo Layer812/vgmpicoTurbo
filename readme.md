@@ -11,7 +11,7 @@ MicroPython版の[vgmpico](https://github.com/Layer812/vgmpico/)に比べて遅�
 
 ## 使い方
 ### 使う物
- - Raspbery pico(以降Pico) 1個
+ - Raspbery pico 1個 (作例では[WaveShare RP2040 Zero](https://store.shopping.yahoo.co.jp/orangepicoshop/pico-m-050.html)を使用)
  - ブレッドボード
  - 小型スピーカまたはイヤホン
  - ジャンパ線適宜
