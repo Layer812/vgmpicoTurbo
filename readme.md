@@ -1,13 +1,13 @@
 # vgmpicoTurbo
-vgmpicoTurbo[Raspberry PICO](https://www.switch-science.com/catalog/6900/)向けの[VGMファイル](https://www.jpedia.wiki/blog/en/VGM_(file_format))簡易プレイヤーTurboです。<br>
+vgmpicoTurbo[Raspberry PICO]は、(https://www.switch-science.com/catalog/6900/)向けの[VGMファイル](https://www.jpedia.wiki/blog/en/VGM_(file_format))簡易プレイヤーTurboです。<br>
 MicroPython版の[vgmpico](https://github.com/Layer812/vgmpico/)に比べて遅延を低減し、物理FM音源チップに対応しました。<br>
 
 ## vgmpicoTurboの特徴
- - [Raspberry PICO](https://www.switch-science.com/catalog/6900/)と物理FM音源チップとブレッドボードで手軽にFM音源が楽しめる。(ハンダ不要)
- - 対応する物理的なFM音源チップを、対応するチップ毎に各2個づつ接続できる。
- - FM音源チップ毎のピンアサインの変更がテキストエディタだけで出来る。
- - FM音源チップ毎に必要となるクロックをソフトウェアで出力できる。（水晶発振子不要）
- - [Thonny](https://thonny.org/)を使う事で、PICOのフラッシュメモリのVGMファイルの入れ替えが容易。
+ - [Raspberry PICO](https://www.switch-science.com/catalog/6900/)と物理FM音源チップとブレッドボードが有れば、手軽にFM音源が楽しめます。
+ - 対応する物理的なFM音源チップを、対応するチップ毎に各2個づつ接続できます。
+ - FM音源チップ毎のピンアサインを自由に変更できます。
+ - FM音源チップ毎に必要となるクロックをソフトウェアで出力できます。（水晶発振子不要）
+ - [Thonny](https://thonny.org/)を使う事で、簡単にVGMファイルの入れ替えが出来ます。
 
 ## 使い方
 ### 使う物
@@ -18,7 +18,7 @@ MicroPython版の[vgmpico](https://github.com/Layer812/vgmpico/)に比べて遅�
  - FM音源チップ(対応状況は以下です。)
    - SCC([SoundCortexLPC](https://github.com/toyoshim/SoundCortexLPC) / Konami SSC & AY-3-8910) : 対応
    - YM2413(OPLL) : 対応
-   - YM3438(OPN2 = YM2612) : 対応
+   - YM3438(OPN2 = YM2612) : 対応 (FM音源部)
    - YM2149 : 近日対応
    - DSCG(sn76489) : 近日対応
    - YM2203 ： 近日対応
@@ -81,6 +81,7 @@ Chips =    [[ CHIP_TYPE_YM3438,  -1,  -1,  -1,  0, 1, 2, 3, 4, 5, 6, 7,27,28,14,
  - USB HID経由でmidiコマンド受付
 
 ## 制限
+ - OPN2のDACによるPCM再生は対応していません。
  - VGMコマンド全てには対応していません。
  - ループ回数はソース内の定数部分に有ります。
  - ~~読み込めるVGMファイルサイズは160Kbyte位までです。~~
