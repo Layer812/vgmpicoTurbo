@@ -43,6 +43,7 @@ MicroPython版の[vgmpico](https://github.com/Layer812/vgmpico/)に比べて遅�
   - PWMは使用しません -1としてください。
   - SDAとSCLはSCC([SoundCortexLPC](https://github.com/toyoshim/SoundCortexLPC)向けの定義です。I2C通信に使用するGPIOを指定します。
   - D0～CSまでは、物理チップのピンに接続するGPIOを指定します。定義不要なピンは-1とします。
+  - v0.4以降はRDピンを設定するようにしました。読み取りはしません。常にHigh出力を行います。
   - CLOCKにはクロックを出力するGPIOを指定します。物理チップ毎に決められた周波数のクロックを出力します。
   - 最終行のCHIPS_TYPE_NONEは削除しないでください。
 
