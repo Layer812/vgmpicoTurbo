@@ -103,6 +103,7 @@ Chips =    [[ CHIP_TYPE_YM2151,   -1,  -1,  -1, 14,15,26,27, 8, 7, 6, 5, 2,-1, 1
 ## Thanks to
  - [SoundCortexLPC](https://github.com/toyoshim/SoundCortexLPC) 最近は低遅延の基盤インタフェース作成中らしい、欲しい...
  - [楽しくやろう。](https://blog.boochow.com/) いつも楽しく参考にさせていただいています！
+ - [Web::ooISHoo](http://www.ooishoo.org/project/ym2151shield/) 理解しやすい回路図と説明を公開いただき助かっています！
 
 ## ライセンス
  [Apache License v2.0](http://www.apache.org/licenses/LICENSE-2.0)に基づいてご利用ください。ご連絡は[layer8](https://twitter.com/layer812)までお願いします。
