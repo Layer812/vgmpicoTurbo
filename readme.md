@@ -1,4 +1,4 @@
-# vgmpicoTurbo
+# vgmpicoTurbo v0.4
 vgmpicoTurboは[Raspberry PICO](https://www.switch-science.com/catalog/6900/)向けの[VGMファイル](https://www.jpedia.wiki/blog/en/VGM_(file_format))簡易プレイヤーTurboです。<br>
 MicroPython版の[vgmpico](https://github.com/Layer812/vgmpico/)に比べて遅延を低減し、物理FM音源チップに対応しました。<br>
 
@@ -22,7 +22,7 @@ MicroPython版の[vgmpico](https://github.com/Layer812/vgmpico/)に比べて遅�
    - YM2149 : 近日対応
    - DSCG(sn76489) : 近日対応
    - YM2203 ： 近日対応
-   - YM2151 ： 未対応
+   - YM2151 ： 対応
    - YMF276 ： 未対応
    - SID    ： 未対応
    - YM2608 ： 未対応
@@ -38,7 +38,7 @@ MicroPython版の[vgmpico](https://github.com/Layer812/vgmpico/)に比べて遅�
 2.[Thonny](https://thonny.org/)を使い、main.pyをアップロードします。<br>
 3.接続するFM音源チップ、ピンアサインに応じてmain.pyを変更します。<br>
 　変更箇所は30行目～40行目までの、PythonのList形式で表現されるChips定義です。<br>
-　#[CHIPTYPE,          PWM, SDA, SCL, D0,D1,D2,D3,D4,D5,D6,D7,A0,A1,IC,WR,CS,CLOCK],<br>
+　#[CHIPTYPE,          PWM, SDA, SCL, D0,D1,D2,D3,D4,D5,D6,D7,A0,A1,IC,WR,CS,RD,CLOCK],<br>
   - CHIPTYPEには、接続する物理FM音源チップ(12行目～28行目までに定義)の定数を入れます、同じ種類のチップの定義は２行有効です。
   - PWMは使用しません -1としてください。
   - SDAとSCLはSCC([SoundCortexLPC](https://github.com/toyoshim/SoundCortexLPC)向けの定義です。I2C通信に使用するGPIOを指定します。
@@ -63,6 +63,16 @@ Chips =     [[ CHIP_TYPE_YM2413,  -1,  -1,  -1, 28,29, 0, 1, 2, 3, 4, 5, 8,-1,15
 Chips =    [[ CHIP_TYPE_YM3438,  -1,  -1,  -1,  0, 1, 2, 3, 4, 5, 6, 7,27,28,14,29,-1, 26],
             [ CHIP_TYPE_NONE,  -1,  -1,  -1, -1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1]] #番兵君
 ```
+
+3.YM2151の接続例
+![接続図](https://user-images.githubusercontent.com/111331376/193452641-86b700a6-5807-48ec-af86-95b5811bddc2.png)
+``` Chips定義の例
+　#[CHIPTYPE,          PWM, SDA, SCL, D0,D1,D2,D3,D4,D5,D6,D7,A0,A1,IC,WR,CS,CLOCK],
+Chips =    [[ CHIP_TYPE_YM2151,   -1,  -1,  -1, 14,15,26,27, 8, 7, 6, 5, 2,-1, 1, 3,-1, 4,-1],
+            [ CHIP_TYPE_NONE,  -1,  -1,  -1, -1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1]] #番兵君
+```
+[Ishii](https://twitter.com/ooISHoo)さんの[ym2151shield](http://www.ooishoo.org/project/ym2151shield/)を鳴らすように結線しています。<br>
+実チップに対するI/Oがわかるようにピンアサインも記載しました。<br>
 
 ### VGMファイルの再生方法
  - VGMファイルがvgz形式の場合、7zipやgzipなどで展開しvgm形式にします。
