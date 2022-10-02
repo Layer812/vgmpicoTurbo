@@ -4,7 +4,7 @@ MicroPython版の[vgmpico](https://github.com/Layer812/vgmpico/)に比べて遅�
 
 ## vgmpicoTurboの特徴
  - [Raspberry PICO](https://www.switch-science.com/catalog/6900/)と物理FM音源チップとブレッドボードが有れば、手軽にFM音源が楽しめます。
- - 対応する物理的なFM音源チップを、対応するチップ毎に各2個づつ接続できます。(理論的に接続可能な数は対応チップ数 x 2個です。)
+ - 対応する物理的なFM音源チップを各2個づつ接続できます。(理論的に接続可能な数は対応チップ数 x 2個です。)
  - FM音源チップ毎のピンアサインを自由に変更できます。
  - FM音源チップ毎に必要となるクロックをソフトウェアで出力できます。（水晶発振子不要）
  - [Thonny](https://thonny.org/)を使う事で、簡単にVGMファイルの入れ替えが出来ます。
