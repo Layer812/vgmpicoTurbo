@@ -4,7 +4,7 @@ MicroPython版の[vgmpico](https://github.com/Layer812/vgmpico/)に比べて遅�
 
 ## vgmpicoTurboの特徴
  - [Raspberry PICO](https://www.switch-science.com/catalog/6900/)と物理FM音源チップとブレッドボードが有れば、手軽にFM音源が楽しめます。
- - 対応する物理的なFM音源チップを、対応するチップ毎に各2個づつ接続できます。
+ - 対応する物理的なFM音源チップを、対応するチップ毎に各2個づつ接続できます。(理論的に接続可能な数は対応チップ数 x 2個です。)
  - FM音源チップ毎のピンアサインを自由に変更できます。
  - FM音源チップ毎に必要となるクロックをソフトウェアで出力できます。（水晶発振子不要）
  - [Thonny](https://thonny.org/)を使う事で、簡単にVGMファイルの入れ替えが出来ます。
@@ -66,7 +66,7 @@ Chips =    [[ CHIP_TYPE_YM3438,  -1,  -1,  -1,  0, 1, 2, 3, 4, 5, 6, 7,27,28,14,
 ```
 
 3.YM2151の接続例
-![接続図](https://user-images.githubusercontent.com/111331376/193452641-86b700a6-5807-48ec-af86-95b5811bddc2.png)
+![接続図](https://user-images.githubusercontent.com/111331376/193453700-a3f51515-d8ff-44bd-99db-a373c0ec32ab.png)
 ``` Chips定義の例
 　#[CHIPTYPE,          PWM, SDA, SCL, D0,D1,D2,D3,D4,D5,D6,D7,A0,A1,IC,WR,CS,CLOCK],
 Chips =    [[ CHIP_TYPE_YM2151,   -1,  -1,  -1, 14,15,26,27, 8, 7, 6, 5, 2,-1, 1, 3,-1, 4,-1],
