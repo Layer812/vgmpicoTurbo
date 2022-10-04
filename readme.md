@@ -1,10 +1,11 @@
-# vgmpicoTurbo v0.4
+# vgmpicoTurbo v0.42
 vgmpicoTurboは[Raspberry PICO](https://www.switch-science.com/catalog/6900/)向けの[VGMファイル](https://www.jpedia.wiki/blog/en/VGM_(file_format))簡易プレイヤーTurboです。<br>
-MicroPython版の[vgmpico](https://github.com/Layer812/vgmpico/)に比べて遅延を低減し、物理FM音源チップに対応しました。<br>
+MicroPython版の[vgmpico](https://github.com/Layer812/vgmpico/)に比べて遅延を低減し、物理FM音源チップに対応しています。<br>
+v0.42版ではYMZ294(AY-3-8910)に対応しました。<br>
 
 ## vgmpicoTurboの特徴
  - [Raspberry PICO](https://www.switch-science.com/catalog/6900/)と物理FM音源チップとブレッドボードが有れば、手軽にFM音源が楽しめます。
- - 対応する物理的なFM音源チップを各2個づつ接続できます。(理論的に接続可能な数は対応チップ数 x 2個です。)
+ - 対応する物理的なFM音源チップを各2個づつ接続できます。(理論的な最大接続数は対応チップ数 x 2個です。)
  - FM音源チップ毎のピンアサインを自由に変更できます。
  - FM音源チップ毎に必要となるクロックをソフトウェアで出力できます。（水晶発振子不要）
  - [Thonny](https://thonny.org/)を使う事で、簡単にVGMファイルの入れ替えが出来ます。
@@ -19,7 +20,7 @@ MicroPython版の[vgmpico](https://github.com/Layer812/vgmpico/)に比べて遅�
    - SCC([SoundCortexLPC](https://github.com/toyoshim/SoundCortexLPC) / Konami SSC & AY-3-8910) : 対応
    - YM2413(OPLL) : 対応
    - YM3438(OPN2 = YM2612) : 対応 (FM音源部)
-   - YM2149 : 近日対応
+   - YMZ294 : 対応
    - DSCG(sn76489) : 近日対応
    - YM2203 ： 近日対応
    - YM2151 ： 対応
@@ -48,32 +49,42 @@ MicroPython版の[vgmpico](https://github.com/Layer812/vgmpico/)に比べて遅�
   - 最終行のCHIPS_TYPE_NONEは削除しないでください。
 
 ### 接続のしかた
-1.YM2413 + SCCの接続例
+#### 1.YM2413 + SCCの接続例
 ![接続図](https://user-images.githubusercontent.com/111331376/193421841-b2023a7a-d450-4506-9125-61ee690a7262.png)
 ``` Chips定義の例
-#[CHIPTYPE,          PWM, SDA, SCL, D0,D1,D2,D3,D4,D5,D6,D7,A0,A1,IC,WR,CS,CLOCK],
+#[CHIPTYPE,          PWM, SDA, SCL, D0,D1,D2,D3,D4,D5,D6,D7,A0,A1,IC,WR,CS,RD,CLOCK],
 Chips =     [[ CHIP_TYPE_YM2413,  -1,  -1,  -1, 28,29, 0, 1, 2, 3, 4, 5, 8,-1,15,14,-1, 6],
             [ CHIP_TYPE_SSC,   -1,  12,  13, -1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1],
             [ CHIP_TYPE_NONE,  -1,  -1,  -1, -1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1]] #番兵君
 ```
 
-2.YM3438(YM2612)の接続例
+#### 2.YM3438(YM2612)の接続例
 ![接続図](https://user-images.githubusercontent.com/111331376/193421951-c0c07c5c-f851-422f-a71b-bd2a036278a2.png)
 ``` Chips定義の例
-　#[CHIPTYPE,          PWM, SDA, SCL, D0,D1,D2,D3,D4,D5,D6,D7,A0,A1,IC,WR,CS,CLOCK],
+　#[CHIPTYPE,          PWM, SDA, SCL, D0,D1,D2,D3,D4,D5,D6,D7,A0,A1,IC,WR,CS,RD,CLOCK],
 Chips =    [[ CHIP_TYPE_YM3438,  -1,  -1,  -1,  0, 1, 2, 3, 4, 5, 6, 7,27,28,14,29,-1, 26],
             [ CHIP_TYPE_NONE,  -1,  -1,  -1, -1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1]] #番兵君
 ```
 
-3.YM2151の接続例
+#### 3.YM2151の接続例
 ![接続図](https://user-images.githubusercontent.com/111331376/193453700-a3f51515-d8ff-44bd-99db-a373c0ec32ab.png)
 ``` Chips定義の例
-　#[CHIPTYPE,          PWM, SDA, SCL, D0,D1,D2,D3,D4,D5,D6,D7,A0,A1,IC,WR,CS,CLOCK],
+　#[CHIPTYPE,          PWM, SDA, SCL, D0,D1,D2,D3,D4,D5,D6,D7,A0,A1,IC,WR,CS,RD,CLOCK],
 Chips =    [[ CHIP_TYPE_YM2151,   -1,  -1,  -1, 14,15,26,27, 8, 7, 6, 5, 2,-1, 1, 3,-1, 4,-1],
             [ CHIP_TYPE_NONE,  -1,  -1,  -1, -1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1]] #番兵君
 ```
 [Ishii](https://twitter.com/ooISHoo)さんの[ym2151shield](http://www.ooishoo.org/project/ym2151shield/)を鳴らすように結線しています。<br>
 実チップに対するI/Oがわかるようにピンアサインも記載しました。<br>
+
+#### 4.YMZ294の接続例
+![接続図](https://user-images.githubusercontent.com/111331376/193881468-f412443b-c53e-4779-9cbc-cdcf3c5a8d68.png)
+``` Chips定義の例
+　#[CHIPTYPE,          PWM, SDA, SCL, D0,D1,D2,D3,D4,D5,D6,D7,A0,A1,IC,WR,CS,RD,CLOCK],
+Chips =    [[ CHIP_TYPE_YMZ294,   -1,  -1,  -1,  7, 6, 5, 4, 3, 2, 1, 0,15,-1,27,14,-1,-1,26],
+            [ CHIP_TYPE_NONE,     -1,  -1,  -1, -1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1]] #番兵君
+
+```
+YAMAHA版のAY-3-8910です。派生としてYM2149(IOピンが有る)もあります。
 
 ### VGMファイルの再生方法
  - VGMファイルがvgz形式の場合、7zipやgzipなどで展開しvgm形式にします。
