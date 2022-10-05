@@ -17,8 +17,9 @@ v0.42版ではYMZ294(AY-3-8910)に対応しました。<br>
  - 小型スピーカまたはイヤホン
  - ジャンパ線適宜
  - FM音源チップ(対応状況は以下です。)
+
 | チップ | 対応状況 | 補足 |
-| ---- | ---- | ---- |
+| --- | --- | --- |
 | SCC([SoundCortexLPC](https://github.com/toyoshim/SoundCortexLPC) | 対応 | Konami SSC & AY-3-8910) |
 | YM2413(OPLL) | 対応 |  |
 | YM3438(OPN2 = YM2612) | 対応 | (FM音源部)
