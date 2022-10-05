@@ -17,21 +17,23 @@ v0.42版ではYMZ294(AY-3-8910)に対応しました。<br>
  - 小型スピーカまたはイヤホン
  - ジャンパ線適宜
  - FM音源チップ(対応状況は以下です。)
-   - SCC([SoundCortexLPC](https://github.com/toyoshim/SoundCortexLPC) / Konami SSC & AY-3-8910) : 対応
-   - YM2413(OPLL) : 対応
-   - YM3438(OPN2 = YM2612) : 対応 (FM音源部)
-   - YMZ294 : 対応
-   - DSCG(sn76489) : 近日対応
-   - YM2203 ： 近日対応
-   - YM2151 ： 対応
-   - YMF276 ： 未対応
-   - SID    ： 未対応
-   - YM2608 ： 未対応
-   - YM2610 ： 未対応
-   - APU    ： 未対応
-   - YM3812 ： 未対応
-   - SPU    ： 未対応
-   - NSX1   ： 未対応
+| チップ | 対応状況 | 補足 |
+| ---- | ---- | ---- |
+| SCC([SoundCortexLPC](https://github.com/toyoshim/SoundCortexLPC) | 対応 | Konami SSC & AY-3-8910) |
+| YM2413(OPLL) | 対応 |  |
+| YM3438(OPN2 = YM2612) | 対応 | (FM音源部)
+| YMZ294 | 対応 |  |
+| DSCG(sn76489) | 近日対応 |  |
+| YM2203 | 近日対応 |  |
+| YM2151 | 対応 |  |
+| YMF276 | 未対応 |  |
+| SID    | 未対応 |  |
+| YM2608 | 未対応 |  |
+| YM2610 | 未対応 |  |
+| APU    | 未対応 |  |
+| YM3812 | 未対応 |  |
+| SPU    | 未対応 |  |
+| NSX1   | 未対応 |  |
 
 ## 設定のしかた
 ### ソフトウェア設定
