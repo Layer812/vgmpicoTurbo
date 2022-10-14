@@ -1,7 +1,7 @@
-# vgmpicoTurbo v0.42
+# vgmpicoTurbo v0.5
 vgmpicoTurboは[Raspberry PICO](https://www.switch-science.com/catalog/6900/)向けの[VGMファイル](https://www.jpedia.wiki/blog/en/VGM_(file_format))簡易プレイヤーTurboです。<br>
 MicroPython版の[vgmpico](https://github.com/Layer812/vgmpico/)に比べて遅延を低減し、物理FM音源チップに対応しています。<br>
-v0.42版ではYMZ294(AY-3-8910)に対応しました。<br>
+v0.5版ではYM2203に対応しました。<br>
 
 ## vgmpicoTurboの特徴
  - [Raspberry PICO](https://www.switch-science.com/catalog/6900/)と物理FM音源チップとブレッドボードが有れば、手軽にFM音源が楽しめます。
@@ -25,7 +25,7 @@ v0.42版ではYMZ294(AY-3-8910)に対応しました。<br>
 | YM3438(OPN2 = YM2612) | 対応 | (FM音源部)
 | YMZ294 | 対応 |  |
 | DSCG(sn76489) | 近日対応 |  |
-| YM2203 | 近日対応 |  |
+| YM2203 | 対応 |  |
 | YM2151 | 対応 |  |
 | YMF276 | 未対応 |  |
 | SID    | 未対応 |  |
@@ -89,6 +89,15 @@ Chips =    [[ CHIP_TYPE_YMZ294,   -1,  -1,  -1,  7, 6, 5, 4, 3, 2, 1, 0,15,-1,27
 ```
 YAMAHA版のAY-3-8910です。派生としてYM2149(IOピンが有る)もあります。
 
+#### 5.YM2203 の接続例
+![接続図](https://user-images.githubusercontent.com/111331376/195777609-8bd2a41e-137d-418f-b2fc-95f17cc66849.png)
+``` Chips定義の例
+　#[CHIPTYPE,          PWM, SDA, SCL, D0,D1,D2,D3,D4,D5,D6,D7,A0,A1,IC,WR,CS,RD,CLOCK],
+Chips =    [[ CHIP_TYPE_YM2203,   -1,  -1,  -1,  29, 0, 1, 2, 3, 4, 5, 6,27,-1,14,15,-1,26,28],
+            [ CHIP_TYPE_NONE,  -1,  -1,  -1, -1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1]] #番兵君
+```
+PSGの音が比較的大きいのでR1-R4は1KΩ、R5は470Ω程度で調整すると良いと思います。C1は10ufで確認しています。<br>
+オペアンプはNJM4580DDを選びました。<br>
 ### VGMファイルの再生方法
  - VGMファイルがvgz形式の場合、7zipやgzipなどで展開しvgm形式にします。
  - [Thonny](https://thonny.org/)などを使い、main.pyと上記vgmファイルを同じディレクトリに転送します。
