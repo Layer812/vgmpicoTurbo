@@ -48,7 +48,6 @@ time.sleep(1)
 #初期化
 for i, chip in enumerate(Chips):
     rc = vgmpicoTurbo.modinit(chip, i, chip[0])
-    print(chip[0], rc)
 #main.pyと同じディレクトリにあるvgmファイルを全部再生
 for file in os.listdir('/'):
     if ".vgm" not in file:
@@ -57,7 +56,6 @@ for file in os.listdir('/'):
         Gd3buff[0] = LOOP_NUM
         vgm_data = fr.read(BUFFER_SIZE)
         rc = vgmpicoTurbo.vgminit(vgm_data, BUFFER_SIZE, MvGd3buff)
-        print(file, rc)
         while rc > 0:
             fr.seek(rc, 0)
             vgm_data = fr.read(BUFFER_SIZE)
