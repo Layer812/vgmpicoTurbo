@@ -14,7 +14,7 @@ v0.5版ではYM2203に対応しました。<br>
 ### 使う物
  - Raspbery pico 1個 (作例では[WaveShare RP2040 Zero](https://store.shopping.yahoo.co.jp/orangepicoshop/pico-m-050.html)を使用)
  - ブレッドボード
- - 小型スピーカまたはイヤホン
+ - 小型スピーカまたはイヤホン(音が小さい場合[秋月さんの2Wアンプ](https://akizukidenshi.com/catalog/g/gK-08217/)おすすめ)
  - ジャンパ線適宜
  - FM音源チップ(対応状況は以下です。)
 
@@ -87,7 +87,8 @@ Chips =    [[ CHIP_TYPE_YMZ294,   -1,  -1,  -1,  7, 6, 5, 4, 3, 2, 1, 0,15,-1,27
             [ CHIP_TYPE_NONE,     -1,  -1,  -1, -1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1]] #番兵君
 
 ```
-YAMAHA版のAY-3-8910です。派生としてYM2149(IOピンが有る)もあります。
+YAMAHA版のAY-3-8910です。派生としてYM2149(IOピンが有る)もあります。<br>
+スピーカーの前に[秋月さんの2Wアンプ](https://akizukidenshi.com/catalog/g/gK-08217/)を繋いでいます。<br>
 
 #### 5.YM2203 の接続例
 ![接続図](https://user-images.githubusercontent.com/111331376/195777609-8bd2a41e-137d-418f-b2fc-95f17cc66849.png)
@@ -97,7 +98,7 @@ Chips =    [[ CHIP_TYPE_YM2203,   -1,  -1,  -1,  29, 0, 1, 2, 3, 4, 5, 6,27,-1,1
             [ CHIP_TYPE_NONE,  -1,  -1,  -1, -1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1]] #番兵君
 ```
 PSGの音が比較的大きいのでR1-R4は1KΩ、R5は470Ω程度で調整すると良いと思います。C1は10ufで確認しています。<br>
-オペアンプはNJM4580DDを選びました。<br>
+オペアンプはNJM4580DDを選びました。スピーカーの前に[秋月さんの2Wアンプ](https://akizukidenshi.com/catalog/g/gK-08217/)を繋いでいます。<br>
 ### VGMファイルの再生方法
  - VGMファイルがvgz形式の場合、7zipやgzipなどで展開しvgm形式にします。
  - [Thonny](https://thonny.org/)などを使い、main.pyと上記vgmファイルを同じディレクトリに転送します。
